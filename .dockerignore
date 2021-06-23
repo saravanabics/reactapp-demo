@@ -1,0 +1,7 @@
+/node_modules
+/build
+/Documentation
+/github-assets
+.git
+*.md
+.gitignore

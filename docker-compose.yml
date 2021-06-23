@@ -1,0 +1,6 @@
+version: '3.5'
+services:
+  reactapp:
+    image: saravanacse07/react-demo:latest
+    ports: 
+      - 80:80
