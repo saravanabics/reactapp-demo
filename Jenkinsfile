@@ -1,20 +1,19 @@
 pipeline {
     agent any
-    stages { 
-        stage("build") {
+    stages {
+        stage('SCM') {
             steps {
-                sh 'npm install'
-                sh 'npm run build'
-				}
-			}	
-			stage('Deliver') {
+                git url: 'https://github.com/saravanabics/reactapp-demo.git'
+            }
+        }
+        stage('SonarQube analysis') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh './jenkins/scripts/kill.sh'
-				}
-			
-			}
-		}	
-	}
-	
+                withSonarQubeEnv('sonar_scanner') 
+            }
+        }
+        stage('Build') {
+            steps {
+                sh npm install
+                sh npm run build
+            }
+        }
